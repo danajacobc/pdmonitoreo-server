@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.util.Set;
 import java.util.UUID;
 
+@Getter
+@Setter
 @Entity(name = "pais")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,12 +34,4 @@ public class PaisEntity implements Serializable {
             mappedBy = "pais"
     )
     private Set<PlantasEntity> plantas;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
 }

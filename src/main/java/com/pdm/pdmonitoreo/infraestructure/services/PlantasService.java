@@ -29,7 +29,23 @@ public class PlantasService implements IPlantasService {
 
     @Override
     public PlantasResponse create(PlantasRequest request) {
-        return null;
+       var pais = paisRepository.findById(request.getPais().getId()).orElseThrow();
+
+       var plantaToPersist = PlantasEntity.builder()
+               .id(UUID.randomUUID())
+               .pais(pais)
+               .name(request.getName())
+               .lectures(request.getLectures())
+               .medium_alert(request.getMedium_alert())
+               .red_alert(request.getRed_alert())
+               .enabled(true)
+               .build();
+
+       var plantaPersisted = this.plantasRepository.save(plantaToPersist);
+
+       log.info("Planta guardada con el id: {}", plantaPersisted.getId());
+
+       return this.entityToResponse(plantaPersisted);
     }
 
     @Override
