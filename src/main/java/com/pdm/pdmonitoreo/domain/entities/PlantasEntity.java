@@ -23,6 +23,9 @@ public class PlantasEntity implements Serializable{
     public String name;
 
     @Column
+    public Integer lectures;
+
+    @Column
     public Integer red_alert;
 
     @Column
