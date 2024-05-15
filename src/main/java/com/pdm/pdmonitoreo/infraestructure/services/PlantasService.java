@@ -29,7 +29,8 @@ public class PlantasService implements IPlantasService {
 
     @Override
     public PlantasResponse create(PlantasRequest request) {
-       var pais = paisRepository.findById(request.getPais().getId()).orElseThrow();
+        System.out.println(request);
+       var pais = paisRepository.findById(UUID.fromString(request.getPais())).orElseThrow();
 
        var plantaToPersist = PlantasEntity.builder()
                .id(UUID.randomUUID())
