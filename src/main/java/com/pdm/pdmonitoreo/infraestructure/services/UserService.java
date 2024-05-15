@@ -7,11 +7,13 @@ import com.pdm.pdmonitoreo.domain.entities.PaisEntity;
 import com.pdm.pdmonitoreo.domain.entities.UserEntity;
 import com.pdm.pdmonitoreo.domain.repositories.UserRepository;
 import com.pdm.pdmonitoreo.infraestructure.abstract_service.IUserService;
+import com.pdm.pdmonitoreo.utils.UserAlreadyExistsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Transactional
@@ -27,6 +29,11 @@ public class UserService implements IUserService {
 
     @Override
     public UserResponse create(UserRequest request) {
+        Optional<UserEntity> optionalUser = userRepository.findByEmail(request.getEmail());
+        if(optionalUser.isPresent()){
+            throw new UserAlreadyExistsException("El usuario ya existe.");
+        }
+        System.out.println("optionalUser = " + optionalUser);
         var userToPersist = UserEntity.builder()
                 .id(UUID.randomUUID())
                 .name(request.getName())
