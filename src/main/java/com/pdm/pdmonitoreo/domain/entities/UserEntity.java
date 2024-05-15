@@ -26,16 +26,16 @@ public class UserEntity implements Serializable {
     private UUID id;
 
     @Column(nullable = false, length = 50)
-    public String name;
+    private String name;
 
     @Column(nullable = false, length = 50)
-    public String lastname;
+    private String lastname;
 
     @Column(nullable = false, unique = true, length = 50)
-    public String email;
+    private String email;
 
     @Column(nullable = false)
     @Size(min = 8, message = "Ingrese una contraseña con 8 caracteres como mínimo.")
-    public String password;
+    private String password;
 
 }

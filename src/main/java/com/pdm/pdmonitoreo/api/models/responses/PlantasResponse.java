@@ -1,6 +1,5 @@
-package com.pdm.pdmonitoreo.domain.entities;
+package com.pdm.pdmonitoreo.api.models.responses;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,33 +8,18 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.UUID;
 
-@Entity(name = "plantas")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Builder
-public class PlantasEntity implements Serializable{
+public class PlantasResponse implements Serializable {
 
-    @Id
     private UUID id;
-
-    @Column(nullable = false, length = 50)
     private String name;
-
-    @Column
     private Integer lectures;
-
-    @Column
     private Integer red_alert;
-
-    @Column
     private Integer medium_alert;
-
-    @Column
     private Boolean enabled;
-
-    @ManyToOne
-    @JoinColumn(name = "pais_id")
-    private PaisEntity pais;
+    private PaisResponse pais;
 
 }

@@ -18,10 +18,10 @@ public class PaisEntity implements Serializable {
     private UUID id;
 
     @Column(nullable = false, length = 50)
-    public String name;
+    private String name;
 
     @Column(nullable = false)
-    public String img;
+    private String img;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
