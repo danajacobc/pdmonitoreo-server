@@ -32,4 +32,12 @@ public class PaisEntity implements Serializable {
             mappedBy = "pais"
     )
     private Set<PlantasEntity> plantas;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
 }
