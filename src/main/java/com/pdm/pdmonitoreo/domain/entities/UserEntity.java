@@ -3,6 +3,8 @@ package com.pdm.pdmonitoreo.domain.entities;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,6 +35,7 @@ public class UserEntity implements Serializable {
     public String email;
 
     @Column(nullable = false)
+    @Size(min = 8, message = "Ingrese una contraseña con 8 caracteres como mínimo.")
     public String password;
 
 }
