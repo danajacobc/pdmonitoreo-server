@@ -33,7 +33,7 @@ public class PlantasEntity implements Serializable{
     @Column
     private Boolean enabled;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pais_id")
     private PaisEntity pais;
 
