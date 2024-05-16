@@ -10,6 +10,7 @@ import com.pdm.pdmonitoreo.utils.UserAlreadyExistsException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +24,7 @@ import java.util.UUID;
 public class UserService implements IUserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserResponse create(UserRequest request) {
@@ -30,13 +32,12 @@ public class UserService implements IUserService {
         if(optionalUser.isPresent()){
             throw new UserAlreadyExistsException("El usuario ya existe.");
         }
-        System.out.println("optionalUser = " + optionalUser);
         var userToPersist = UserEntity.builder()
                 .id(UUID.randomUUID())
                 .username(request.getUsername())
                 .lastname(request.getLastname())
                 .email(request.getEmail())
-                .password(request.getPassword())
+                .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();
 
