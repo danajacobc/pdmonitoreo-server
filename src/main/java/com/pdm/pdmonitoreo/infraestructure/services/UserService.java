@@ -1,5 +1,7 @@
 package com.pdm.pdmonitoreo.infraestructure.services;
 
+import com.pdm.pdmonitoreo.Auth.AuthResponse;
+import com.pdm.pdmonitoreo.Jwt.JwtService;
 import com.pdm.pdmonitoreo.api.models.request.UserRequest;
 import com.pdm.pdmonitoreo.api.models.responses.UserResponse;
 import com.pdm.pdmonitoreo.domain.entities.UserEntity;
