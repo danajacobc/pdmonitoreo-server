@@ -5,6 +5,7 @@ import com.pdm.pdmonitoreo.api.models.responses.UserResponse;
 import com.pdm.pdmonitoreo.domain.entities.UserEntity;
 import com.pdm.pdmonitoreo.domain.repositories.UserRepository;
 import com.pdm.pdmonitoreo.infraestructure.abstract_service.IUserService;
+import com.pdm.pdmonitoreo.utils.Role;
 import com.pdm.pdmonitoreo.utils.UserAlreadyExistsException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,10 +33,11 @@ public class UserService implements IUserService {
         System.out.println("optionalUser = " + optionalUser);
         var userToPersist = UserEntity.builder()
                 .id(UUID.randomUUID())
-                .name(request.getName())
+                .username(request.getUsername())
                 .lastname(request.getLastname())
                 .email(request.getEmail())
                 .password(request.getPassword())
+                .role(Role.USER)
                 .build();
 
         var userPersisted = this.userRepository.save(userToPersist);

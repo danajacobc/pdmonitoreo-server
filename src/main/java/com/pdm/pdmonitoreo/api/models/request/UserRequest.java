@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Builder
 public class UserRequest implements Serializable {
 
-    private String name;
+    private String username;
     private String lastname;
     private String email;
     private String password;
