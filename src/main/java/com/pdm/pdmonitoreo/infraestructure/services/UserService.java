@@ -1,31 +1,35 @@
 package com.pdm.pdmonitoreo.infraestructure.services;
 
 import com.pdm.pdmonitoreo.api.models.request.UserRequest;
-import com.pdm.pdmonitoreo.api.models.responses.PaisResponse;
 import com.pdm.pdmonitoreo.api.models.responses.UserResponse;
-import com.pdm.pdmonitoreo.domain.entities.PaisEntity;
 import com.pdm.pdmonitoreo.domain.entities.UserEntity;
 import com.pdm.pdmonitoreo.domain.repositories.UserRepository;
 import com.pdm.pdmonitoreo.infraestructure.abstract_service.IUserService;
 import com.pdm.pdmonitoreo.utils.UserAlreadyExistsException;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Transactional
 @Service
 @Slf4j
+@AllArgsConstructor
 public class UserService implements IUserService {
 
     private final UserRepository userRepository;
-
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Override
     public UserResponse create(UserRequest request) {
