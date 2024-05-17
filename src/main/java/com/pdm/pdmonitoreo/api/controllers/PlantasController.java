@@ -39,8 +39,8 @@ public class PlantasController {
     }
 
     @DeleteMapping(path = "{id}")
-    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+    public Boolean delete(@PathVariable UUID id) {
         this.plantasService.delete(id);
-        return ResponseEntity.noContent().build();
+        return true;
     }
 }

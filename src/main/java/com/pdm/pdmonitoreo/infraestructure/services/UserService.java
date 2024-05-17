@@ -32,7 +32,8 @@ public class UserService implements IUserService {
     public UserResponse create(UserRequest request) {
         Optional<UserEntity> optionalUser = userRepository.findByEmail(request.getEmail());
         if(optionalUser.isPresent()){
-            throw new UserAlreadyExistsException("El usuario ya existe.");
+//            throw new UserAlreadyExistsException("El usuario ya existe.");
+            return this.entityToResponse(optionalUser.get());
         }
         var userToPersist = UserEntity.builder()
                 .id(UUID.randomUUID())
